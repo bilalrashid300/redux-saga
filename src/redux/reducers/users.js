@@ -1,31 +1,48 @@
-import * as type from '../types';
+import * as type from "../types";
 
 const initialState = {
-    users: [],
-    loading: false,
-    error: null,
-}
+  users: [],
+  loading: false,
+  error: null,
+};
 
-export default function usersReducer (state = initialState, action) {
-    switch (action.type) {
-        case type.GET_USERS_REQUESTED: 
-            return {
-                ...state,
-                loading: true,
-            }
-        case type.GET_USERS_SUCCESS: 
-            return {
-                ...state,
-                loading: false,
-                users: action.users,
-            }
-        case type.GET_USERS_FAILED: 
-            return {
-                ...state,
-                loading: false,
-                error: action.message,
-            }
-        default: 
-            return state;
-    }
+export default function usersReducer(state = initialState, action) {
+  switch (action.type) {
+    case type.GET_USERS_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.GET_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: action.users,
+      };
+    case type.GET_USERS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.message,
+      };
+    case type.SET_USERS_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.SET_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        users: [...state.users, action.users]
+      };
+    case type.SET_USERS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.message,
+      };
+    default:
+      return state;
+  }
 }

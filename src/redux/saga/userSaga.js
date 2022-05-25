@@ -11,8 +11,19 @@ function* fetchUsers (action) {
     }
 }
 
+function* setUser (action) {
+    try {
+        // const users = yield call(getUserAPI)
+        // const users = yield call(action.payload);
+        yield put({ type: types.SET_USERS_SUCCESS , users: action.payload})
+    } catch (e) {
+        yield put({ type: types.SET_USERS_FAILED , message: e.message})
+    }
+}
+
 function* userSaga () {
     yield takeEvery( types.GET_USERS_REQUESTED , fetchUsers);
+    yield takeEvery( types.SET_USERS_REQUESTED , setUser);
 }
 
 export default userSaga;
